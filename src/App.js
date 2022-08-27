@@ -1,9 +1,9 @@
-import Signup from "./components/Signup";
+import AuthPage from "./pages/AuthPage";
 
 function App() {
   return (
     <div className="App">
-      <Signup />
+      <AuthPage />
     </div>
   );
 }
