@@ -45,6 +45,5 @@ test("change value of input works correctly", () => {
     </Provider>
   )
   const inputEl = screen.getByTestId("input")
-
   expect(inputEl).toBeInTheDocument()
 })
