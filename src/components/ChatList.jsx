@@ -49,7 +49,7 @@ export default function ChatList() {
     <>
     <div className="h-full">
         
-        <Button className="flex items-center justify-center mx-auto" onClick={handleLoadMore} ref={loadBtn} id="loadmore">Load More</Button>
+        <Button className={`${dataToDisplay.length === 0 ? "hidden" : ""} flex items-center justify-center mx-auto`} onClick={handleLoadMore} ref={loadBtn} id="loadmore">Load More</Button>
         <div>
             <div  className="px-2">
                 { dataToDisplay.reverse().map((chat, idx) => 
