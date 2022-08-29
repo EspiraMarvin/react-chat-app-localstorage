@@ -34,7 +34,7 @@ export default function ChatList() {
         >
             Load More
         </Button>
-        <div>
+        <div style={{overflowX: "hidden", overflowY: "scroll"}} className="h-[650px] md:h-[630px] lg:h-[570px] xl:h-[580px] 2xl:h-[750px]">
             <div  className="px-2">
                 { dataToDisplay.reverse().map((chat, idx) => 
                     (
