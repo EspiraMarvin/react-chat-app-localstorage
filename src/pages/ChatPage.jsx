@@ -15,9 +15,8 @@ export default function ChatPage() {
         </header>
 
         <main>
-            {/* <div class="absolute bottom-20 w-full h-[400px]"> */}
-            <div className="absolute bottom-20 w-full h-[400px]">
-            <ChatList />
+            <div className="absolute w-full bottom-20" style={{height: "770px", overflowX: "hidden", overflowY: "scroll"}} >
+              <ChatList />
             </div>
         </main>
 

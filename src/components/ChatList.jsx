@@ -1,17 +1,14 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ChatMessage from './ChatMessage';
 
 export default function ChatList() {
     const [loadMore, setLoadMore] = useState(false)
     const [count, setCount] = useState(25)
-    const dispatch = useDispatch()
     const username = useSelector((state) => state.users.user.name)
-    const chats = useSelector((state) => state.chats.chats)
-    const dataToDisplay = loadMore ? chats.slice(0, count) : chats.slice(0, 25)
-
-    const loadBtn = useRef(null)
+    let chats = useSelector((state) => state.chats.chats)
+    let dataToDisplay = loadMore ? chats.slice(0, count) : chats.slice(0, 25)
 
 
     const handleLoadMore = () => {
@@ -19,37 +16,24 @@ export default function ChatList() {
         setCount(prevCount => prevCount + 25)
     }
 
-    const isInViewport = (element) => {
-        const rect = element.getBoundingClientRect();
-        console.log('rec is in viewport', rect)
-
-        return (
-            rect.top >= 0 &&
-            rect.left >= 0 &&
-            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-        );
-    }
-    
-
     useEffect(() => {
-        // window.addEventListener('scroll', (event) => {});
+        if (dataToDisplay.length >= 25) {
+            setLoadMore(true)
+    }
 
-        // onscroll = (event) => { console.log('event', event)}
+    }, [dataToDisplay])
 
-        // const element = document.getElementById("loadmore");
-        // element.scrollIntoView();
-        // console.log('ELEMENT FOUND', element.scrollIntoView())
-
-
-    }, [])
 
     
   return (
     <>
     <div className="h-full">
-        
-        <Button className={`${dataToDisplay.length === 0 ? "hidden" : ""} flex items-center justify-center mx-auto`} onClick={handleLoadMore} ref={loadBtn} id="loadmore">Load More</Button>
+        <Button className={`${dataToDisplay.length < 25 || dataToDisplay.length === chats.length ? "hidden" : "block"} flex items-center justify-center mx-auto`} 
+        onClick={handleLoadMore} 
+        data-testid="loadmorebtn"
+        >
+            Load More
+        </Button>
         <div>
             <div  className="px-2">
                 { dataToDisplay.reverse().map((chat, idx) => 
@@ -67,7 +51,6 @@ export default function ChatList() {
             </div>
         </div>
        
-        {/* <div className='bg-red-500' ref={messagesRef}>masad</div> */}
 
     </div>
     </>

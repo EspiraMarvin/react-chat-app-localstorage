@@ -37,7 +37,7 @@ export default function SendChat() {
             </Grid>
 
             <Grid className="mx-auto md:mx-5">
-                <Fab onClick={handleSubmit} className="bg-blue-500" color="primary" aria-label="add"><KeyboardArrowRight /></Fab>
+                <Fab onClick={handleSubmit} data-testid="submit-chat-btn" className="bg-blue-500" color="primary" aria-label="add"><KeyboardArrowRight /></Fab>
             </Grid>
         </div>
         </form>
