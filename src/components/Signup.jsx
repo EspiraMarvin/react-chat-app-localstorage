@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { signInUser } from '../toolkit/usersSlice';
-import { fetchChats } from '../lib/storage';
 
 
 export default function Signup() {
     const [error, setError] = useState(false)
-    const [name, setName] = useState('marvin')
+    const [name, setName] = useState('')
     const dispatch = useDispatch()
 
     const handleSubmit = (e) => {
@@ -17,12 +16,8 @@ export default function Signup() {
         setError(true) 
         return
       } else { setError(false) }
-      // let id = useId()
       let id = Math.random()*10
-      console.log('id random', id)
-
       dispatch(signInUser({name: name, id: id}))
-      fetchChats()
     }
 
   return (
@@ -40,14 +35,17 @@ export default function Signup() {
             setError(false)
             setName(e.target.value)
           }}
-          className={`${!error} w-[300px] sm:w-80 md:w-96 pb-6`}
+          className={`${!error} pb-2} w-[300px] sm:w-80 md:w-96 pb-3`}
           error={!!error}
+          data-testid="input"
         />
+        {error && <div id="error" data-testid="error-message">Enter a username</div>}
       
     
       <Button
         type="submit"
         className='py-3 text-white bg-blue-600 w-[300px] sm:w-80 md:w-96 hover:bg-blue-800'
+        data-testid="submit-btn"
       >
         Submit
       </Button>

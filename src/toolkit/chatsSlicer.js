@@ -7,8 +7,6 @@ const initialState = {
     chats: fetchChats()
 }
 
-console.log('initialState', initialState.chats)
-
 const chatsSlice = createSlice({
     name: "chats",
     initialState,
@@ -16,13 +14,9 @@ const chatsSlice = createSlice({
         sendChat: (state, action) => {
             state.chats = [action.payload, ...state.chats]
             saveChats(state.chats)
-            fetchChats()
         },
         loadChats: (state, action) => {
-            return{
-                ...state, 
-                chat: action.payload
-            } 
+            state.chats = fetchChats()
         }
     }
 })

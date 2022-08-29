@@ -5,7 +5,7 @@ import ChatPage from "./pages/ChatPage";
 function App() {
   const isLoggedIn = useSelector((state) => state.users.isLoggedIn)
   return (
-    <div className="App">
+    <div>
       {isLoggedIn ?  <ChatPage /> :  <AuthPage /> }
     </div>
   );

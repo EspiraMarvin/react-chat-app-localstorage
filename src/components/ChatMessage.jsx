@@ -7,7 +7,6 @@ export default function Chat({isOwn, sender, children, loadMore}) {
     const messageRef = useRef(null)
 
     const scrollToBottom = () => {
-      // messageRef.current.scroll(0, messageRef.current.scrollHeight);
       messageRef.current.scrollIntoView({ behavior: "smooth" })
     }
 
@@ -19,14 +18,17 @@ export default function Chat({isOwn, sender, children, loadMore}) {
 
   return (
 
-       <ListItemText className={`${isOwn ? "text-right" : "text-left" } h-16 `}>
+    <div className="flex-row-reverse">
+        <ListItemText className={`${isOwn ? "text-right" : "text-left" } h-16 `}>
           <div className={`${isOwn ? "text-right" : "text-left"} lg:p-2`}>
             {children}
           </div>
           <div className="text-xs">
-            {sender}, 09:31
+            {sender}
           </div>
           <div ref={messageRef} className="mb-16"></div>
         </ListItemText>
+    </div>
+
   )
 }
