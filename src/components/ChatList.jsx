@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Button from '@mui/material/Button';
 import { useSelector } from 'react-redux';
 import ChatMessage from './ChatMessage';
@@ -8,7 +8,8 @@ export default function ChatList() {
     const [count, setCount] = useState(25)
     const username = useSelector((state) => state.users.user.name)
     let chats = useSelector((state) => state.chats.chats)
-    let dataToDisplay = loadMore ? chats.slice(0, count) : chats.slice(0, 25)
+    let memoizedChats = useMemo(() => chats, [chats])
+    let dataToDisplay = loadMore ? memoizedChats.slice(0, count) : memoizedChats.slice(0, 25)
 
 
     const handleLoadMore = () => {
@@ -28,7 +29,7 @@ export default function ChatList() {
   return (
     <>
     <div className="h-full">
-        <Button className={`${dataToDisplay.length < 25 || dataToDisplay.length === chats.length ? "hidden" : "block"} flex items-center justify-center mx-auto`} 
+        <Button className={`${dataToDisplay.length < 25 || dataToDisplay.length === memoizedChats.length ? "hidden" : "block"} flex items-center justify-center mx-auto`} 
         onClick={handleLoadMore} 
         data-testid="loadmorebtn"
         >
