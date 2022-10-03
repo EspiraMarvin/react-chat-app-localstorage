@@ -13,7 +13,7 @@ export default function Chat({isOwn, sender, children, loadMore}) {
     useEffect(() => {
       if (loadMore) return
       scrollToBottom()
-    }, [children, loadMore])
+    }, [loadMore])
 
 
   return (
@@ -23,11 +23,11 @@ export default function Chat({isOwn, sender, children, loadMore}) {
           <div className={`${isOwn ? "text-right" : "text-left"} lg:p-2`}>
             {children}
           </div>
-          <div className="text-xs">
+          <div className="text-[10px] italic">
             {sender}
           </div>
-          <div ref={messageRef} className="mb-16"></div>
         </ListItemText>
+        <div ref={messageRef}></div>
     </div>
 
   )

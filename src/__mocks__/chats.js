@@ -1,13 +1,15 @@
+import { v4 } from "uuid"
+
 const mockResponse = {
     data: {
         chats: [
             {
-                id: Math.round(Math.random() * 10),
+                id: v4(),
                 name: "Marvin",
                 chat: ['Hey, how are you?']
             },
             {
-                id: Math.round(Math.random() * 10),
+                id: v4(),
                 name: "test",
                 chat: ['Hey hey, I`m doing okay']
             }

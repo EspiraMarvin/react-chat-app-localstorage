@@ -7,7 +7,7 @@ import { signInUser } from '../toolkit/usersSlice';
 
 export default function Signup() {
     const [error, setError] = useState(false)
-    const [name, setName] = useState('marvin')
+    const [name, setName] = useState('')
     const dispatch = useDispatch()
 
     const hasWhiteSpaces = (s) => {
@@ -34,7 +34,8 @@ export default function Signup() {
  
         <TextField 
           label="Name" 
-          variant="outlined"   
+          variant="outlined"  
+          id="add-username" 
           type="text"
           value={name}
           onChange={(e) =>  {
