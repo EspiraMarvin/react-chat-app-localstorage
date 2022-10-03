@@ -7,17 +7,23 @@ import { signInUser } from '../toolkit/usersSlice';
 
 export default function Signup() {
     const [error, setError] = useState(false)
-    const [name, setName] = useState('')
+    const [name, setName] = useState('marvin')
     const dispatch = useDispatch()
+
+    const hasWhiteSpaces = (s) => {
+      return s.indexOf(' ') >= 0
+    }
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      if (!Boolean(name)) {
+      if (hasWhiteSpaces(name) || name.length === 0){
         setError(true) 
         return
-      } else { setError(false) }
-      let id = Math.random()*10
-      dispatch(signInUser({name: name, id: id}))
+      } else {
+         setError(false)
+         let id = Math.random()*10
+         dispatch(signInUser({name: name, id: id}))
+      }
     }
 
   return (
@@ -35,11 +41,11 @@ export default function Signup() {
             setError(false)
             setName(e.target.value)
           }}
-          className={`${!error} pb-2} w-[300px] sm:w-80 md:w-96 pb-3`}
+          className={`${!error} w-[300px] sm:w-80 md:w-96 pb-3`}
           error={!!error}
           data-testid="input"
         />
-        {error && <div id="error" data-testid="error-message">Enter a username</div>}
+        {error && <div className="pb-2 pl-3 text-red-500" id="error" data-testid="error-message">Enter a username</div>}
       
     
       <Button
