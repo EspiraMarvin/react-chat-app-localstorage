@@ -11,9 +11,9 @@ export default function NavHeader() {
   } 
     
   return (
-    <div className="fixed inset-x-0 z-50 p-4 text-white bg-black shadow-xl row md:p-6">
-    <div className="text-xl font-bold text-center ">Chat</div>
-    <div className="text-right cursor-pointer -mt-7" onClick={logout}>Logout</div>
-  </div>
+      <header className="fixed top-0 z-50 flex items-center justify-center w-full h-16 text-white bg-gray-900 shadow-xl md:h-16 ">
+        <div className="text-xl font-bold text-center ">Chat</div>
+        <div className="absolute text-right cursor-pointer right-4" onClick={logout}>Logout</div>
+      </header>
   )
 }

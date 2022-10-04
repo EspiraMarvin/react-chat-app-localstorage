@@ -18,7 +18,7 @@ test("change value of input works correctly", () => {
   })
 
 
-test("send chat", () => {
+test("renders submit chat button", () => {
   render(
     <Provider store={store}>
       <SendChat />
@@ -27,7 +27,6 @@ test("send chat", () => {
   const submitChatBtn = screen.getByTestId("submit-chat-btn")
   expect(submitChatBtn).toBeInTheDocument()
  })
- 
 
 })
   

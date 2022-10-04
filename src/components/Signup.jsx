@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import { useDispatch } from "react-redux"
 import { signInUser } from '../toolkit/usersSlice';
@@ -10,13 +9,11 @@ export default function Signup() {
     const [name, setName] = useState('')
     const dispatch = useDispatch()
 
-    const hasWhiteSpaces = (s) => {
-      return s.indexOf(' ') >= 0
-    }
+    const whiteSpacesOnlyRegex = /\s/g
 
     const handleSubmit = (e) => {
       e.preventDefault()
-      if (hasWhiteSpaces(name) || name.length === 0){
+      if (name.replace(whiteSpacesOnlyRegex,"") === ""){
         setError(true) 
         return
       } else {
@@ -49,13 +46,13 @@ export default function Signup() {
         {error && <div className="pb-2 pl-3 text-red-500" id="error" data-testid="error-message">Enter a username</div>}
       
     
-      <Button
+      <button
         type="submit"
         className='py-3 text-white bg-blue-600 w-[300px] sm:w-80 md:w-96 hover:bg-blue-800'
         data-testid="submit-btn"
       >
         Submit
-      </Button>
+      </button>
       </form>
       </div>
     </>

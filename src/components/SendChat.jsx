@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import TextField from '@mui/material/TextField';
-import Grid from '@mui/material//Grid';
 import Fab from '@mui/material/Fab';
 import { KeyboardArrowRight } from '@mui/icons-material';
 import { useSelector, useDispatch } from "react-redux"
@@ -11,20 +10,29 @@ export default function SendChat() {
   const user = useSelector((state) => state.users.user)
   const dispatch = useDispatch()
 
+  const getTimeDate = () => {
+    let today = new Date()
+    let date = (today.getMonth()+1)+'-'+today.getDate()+'-'+today.getFullYear()
+    let time = today.getHours() + ":" + today.getMinutes()
+    let dateTime = date+' '+time;
+    return dateTime
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (!Boolean(chat)) return
-    dispatch(sendChat({ message: chat, name: user.name, id: user.id}))
+    if (chat.replace( /\s/g,"") === "")return
+    dispatch(sendChat({ message: chat, name: user.name, id: Math.floor(Math.random() * 100) , timeStamp: getTimeDate()}))
     setChat('')
     dispatch(loadChats())
   }
 
   return (
-    <>
-      <form onSubmit={handleSubmit} className="w-full h-16 mx-auto mb-3 md:ml-14">
-        <div className="grid grid-cols-4 p-3 mx-auto">
+    <footer className="fixed bottom-0 flex items-center justify-center w-full h-20 border-t-[1px] border-gray-200 ">
 
-        <Grid className="col-span-3">
+      <form onSubmit={handleSubmit} className="z-50 w-full h-16 mb-2">
+        <div className="flex justify-center w-full p-3 mx-auto">
+
+        <div className="w-5/6">
                 <TextField
                  data-testid="input"
                   type="text"
@@ -34,13 +42,13 @@ export default function SendChat() {
                   value={chat}
                   onChange={(e) => setChat(e.target.value)}
                 />
-            </Grid>
+            </div>
 
-            <Grid className="mx-auto md:mx-5">
+            <div className="mx-auto md:mx-5">
                 <Fab onClick={handleSubmit} data-testid="submit-chat-btn" className="bg-blue-500" color="primary" aria-label="add"><KeyboardArrowRight /></Fab>
-            </Grid>
+            </div>
         </div>
         </form>
-    </>
+      </footer>
   )
 }

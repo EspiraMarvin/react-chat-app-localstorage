@@ -1,31 +1,19 @@
 import React from 'react'
 import NavHeader from '../components/NavHeader'
 import ChatList from '../components/ChatList'
-import Divider from '@mui/material/Divider';
 import SendChat from '../components/SendChat';
 
 export default function ChatPage() {
 
   return (
-    <div className="" data-testid="chat-page">
+    <div data-testid="chat-page">
 
-      <div>
-        <header>
-          <NavHeader />
-        </header>
+      <NavHeader />
 
-        <main>
-            <div className="absolute w-full bottom-20" >
-              <ChatList />
-            </div>
-        </main>
+      <ChatList />
 
-        <Divider className="mb-10"  />
-
-        <footer className="fixed bottom-0 left-0 flex items-center justify-center w-full h-20 border-t-2 border-white ">
-               <SendChat /> 
-        </footer>
-    </div>
+      <SendChat /> 
+ 
 
     </div>
   )

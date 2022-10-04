@@ -4,9 +4,10 @@ import { store } from "../../toolkit/store"
 import { Provider } from "react-redux"
 import Signup from '../Signup';
 
+
 describe('tests sign up component', () => {
 
-    test('renders instructions to start in signup', () => {
+    test('renders instructions to start in signup', async () => {
         render(
           <Provider store={store}>
             <Signup />
@@ -17,18 +18,19 @@ describe('tests sign up component', () => {
       });
       
 
-      test('checks if submit button renders', () => {
+      test('checks if submit button renders', async () => {
         render(
           <Provider store={store}>
             <Signup />
           </Provider>
         );
-       const submitBtn = screen.getByTestId("submit-btn")
-       expect(submitBtn.textContent).toBe("Submit")
+      //  const submitBtn = screen.getByRole("submit-btn")
+      const submitBtn = screen.getByRole("button")
+      expect(submitBtn.textContent).toBe("Submit")
       });
       
 
-test("input contains initial value of undefined", () => {
+test("input contains initial value of undefined", async () => {
     render(
         <Provider store={store}>
             <Signup />
